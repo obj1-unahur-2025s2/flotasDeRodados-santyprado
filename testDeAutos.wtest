@@ -1,0 +1,80 @@
+import autos.*
+
+describe "Probando el corsa" {
+  
+
+  const corsita1 = new Corsa(color = "Negro")
+  
+  test "capacidad del corsa" {
+    assert.equals(4, corsita1.capacidad())
+  }
+  test "velocidad del corsa" {
+    
+    assert.equals(150, corsita1.velocidad())
+  }
+  test "peso del corsa" {
+    
+    assert.equals(1300, corsita1.peso())
+  }
+  test "color del corsa" {
+    
+    assert.equals("Negro", corsita1.color())
+  }
+
+
+}
+describe "Probando el kwid sin tanque" {
+  
+
+  const kwid = new Kwid(tanqueAdicional = false)
+  
+  test "capacidad del Kwid" {
+    assert.equals(4, kwid.capacidad())
+  }
+  test "velocidad del Kwid" {
+    
+    assert.equals(110, kwid.velocidad())
+  }
+  test "peso del Kwid" {
+    
+    assert.equals(1200, kwid.peso())
+  }
+  test "color del Kwid" {
+    
+    assert.equals("Azul", kwid.color())
+  }
+}
+describe "Probando el kwid con tanque" {
+  
+
+  const kwid = new Kwid(tanqueAdicional = true)
+  
+  test "capacidad del Kwid" {
+    assert.equals(3, kwid.capacidad())
+  }
+  test "velocidad del Kwid" {
+    
+    assert.equals(120, kwid.velocidad())
+  }
+  test "peso del Kwid" {
+    
+    assert.equals(1350, kwid.peso())
+  }
+  test "color del Kwid" {
+    
+    assert.equals("azul", kwid.color())
+  }
+
+
+}
+describe "Probando la traffic"{
+
+  test"Su Capacidad con interior comodo"{
+    assert.equals(5, traffic.capacidad())
+  }
+  test"Su Capacidad con interior popular"{
+    traffic.cambiarInterior(popular)
+    assert.equals(12,traffic.capacidad())
+  }
+
+}
