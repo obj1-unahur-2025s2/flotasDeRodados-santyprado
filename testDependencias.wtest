@@ -1,0 +1,11 @@
+import autos.*
+import dependencia.*
+
+describe "Prueba de dependencias" {
+   const deporte = new Dependencia(cantidadDeEmpleados = 45)
+   const cultura = new Dependencia(cantidadDeEmpleados = 31)
+   
+  test "description" {
+    
+  }
+}
