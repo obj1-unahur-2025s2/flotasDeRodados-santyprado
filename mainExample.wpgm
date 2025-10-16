@@ -1,9 +1,10 @@
 import wollok.game.*
 
-import example.pepita
+import autos.*
+/*
 
-program PepitaGame {
-	game.title("Pepita")
+program Corsas {
+	game.title("Corsas del juego")
 	game.height(10)
 	game.width(10)
 
@@ -12,7 +13,9 @@ program PepitaGame {
 
 	//
 
-	game.showAttributes(pepita) //Debug
-
+	const corsa1 = new Corsa(color = "rojo",image = "autitorojo.png" )
+	keyboard.w().onPressDo({corsa1.moverseHacia(norte)})
+	game.addVisual(corsa1)
 	game.start()
 }
+*/

@@ -4,8 +4,98 @@ import dependencia.*
 describe "Prueba de dependencias" {
    const deporte = new Dependencia(cantidadDeEmpleados = 45)
    const cultura = new Dependencia(cantidadDeEmpleados = 31)
-   
-  test "description" {
+   var cachito = new Corsa(color = "rojo")
+   const pedido1 = new Pedido(distancia = 960,tiempo = 8,cantidadPasajeros=4)
+   const pedido2 = new Pedido(distancia = 960,tiempo = 8,cantidadPasajeros=6)
+   const pedido3 = new Pedido(distancia = 960,tiempo = 6,cantidadPasajeros=4)
+   const pedido4 = new Pedido(distancia = 960,tiempo = 6,cantidadPasajeros=20)
+  method initialize(){
+    deporte.agregarFlota(cachito)
+    deporte.agregarFlota(new Corsa(color = "azul"))
+    deporte.agregarFlota(new Corsa(color = "verde"))
+    deporte.agregarFlota(new Kwid(tanqueAdicional = true))
+    deporte.agregarFlota(new AutosEspecial(capacidad = 5,velocidad =160,peso = 1200 , color = "beige"))
+
+    cultura.agregarFlota(cachito)
+    cultura.agregarFlota(new Kwid(tanqueAdicional = true))
+    cultura.agregarFlota(new Kwid(tanqueAdicional = true))
+    cultura.agregarFlota(new Kwid(tanqueAdicional = false))
+    traffic.cambiarInterior(popular)
+    traffic.cambiarMotor(bataton)
+    cultura.agregarFlota(traffic)
+    pedido1.agregarUnColorIncompatible("azul")
+    pedido1.agregarUnColorIncompatible("negro")
+    pedido2.agregarUnColorIncompatible("negro")
+    pedido3.agregarUnColorIncompatible("negro")
+    pedido4.agregarUnColorIncompatible("negro")
+    deporte.agregarPedido(pedido1)
+    deporte.agregarPedido(pedido2)
+    deporte.agregarPedido(pedido3)
+    deporte.agregarPedido(pedido4)
     
+  } 
+  test "Peso total de la dependencia de deporte" {
+    assert.equals(6450, deporte.pesoTotal())
+  }
+  test "Peso total de la dependencia de cultura" {
+    assert.equals(10700, cultura.pesoTotal())
+    
+  }
+  test "La dependencia de deporte esta bien equipada"{
+    assert.that(deporte.estaBienEquipada())
+  }
+  
+  test "La dependencia de cultura no esta bien equipada"{
+    assert.notThat(cultura.estaBienEquipada())
+  }
+  test "Capacidad total en color azul de la dependencia de deporte" {
+    assert.equals(7, deporte.capacidadTotalEnColor("azul"))
+  }
+  test "Capacidad total en color azul de la dependencia de cultura" {
+    assert.equals(10, cultura.capacidadTotalEnColor("azul"))
+  }
+  test "Color del rodado mas rapido de la dependencia de deporte" {
+    assert.equals("beige", deporte.colorDelRodadoMasRapido())
+  }
+  test "Color del rodado mas rapido de la dependencia de cultura" {
+    assert.equals("rojo", cultura.colorDelRodadoMasRapido())
+  }
+  test "La dependencia de cultura es grande" {
+    assert.notThat(cultura.esGrande())
+  }
+  test "La dependencia de deporte es grande" {
+    assert.that(deporte.esGrande())
+  }
+  test "Capacidad de la depedencia de deporte" {
+    assert.equals(25, deporte.capacidadFaltante())
+  }
+  test "Capacidad de la depedencia de cultura" {
+    assert.equals(5, cultura.capacidadFaltante())
+  }
+  //Test etapa 2
+  test "Cachito puede satisfacer un pedido1" {
+    assert.that(pedido1.puedeSatisfacerPedido(cachito))
+  }
+  test "Cachito no puede satisfacer pedido 2" {
+    assert.notThat(pedido2.puedeSatisfacerPedido(cachito))
+  }
+  test "Cachito no puede satisfacer pedido 3" {
+    assert.notThat(pedido3.puedeSatisfacerPedido(cachito))
+  }
+  test "total de pasajeros en pedidos registrados de dependencia de deporte" {
+    assert.equals(14,deporte.totalDePasajeros())
+  }
+  test "Pedido no puede ser entregado por ningun auto de la dependencia de deporte" {
+    assert.equals({pedido4,pedido1,pedido2},deporte.pedidosInsatisfechos())
+  }
+  test "el color negro es incompatible en todos los pedidos registrados de la dependencia de deporte " {
+    assert.that(deporte.esColorIncompatible("negro"))
+  }
+  test "Tiempo despues de relajar todos los pedidos" {
+    deporte.relajarPedidos()
+    assert.equals(9,pedido1.tiempo())
+    assert.equals(9,pedido2.tiempo())
+    assert.equals(7,pedido3.tiempo())
+    assert.equals(7,pedido4.tiempo())
   }
 }
